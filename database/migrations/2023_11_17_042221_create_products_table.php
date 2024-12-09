@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('price');
             $table->string('quantity')->nullable()->default(1);
             $table->string('weight');
-            $table->string('image');
+            $table->longText('image');
             $table->longText('description');
             $table->timestamps();
         });

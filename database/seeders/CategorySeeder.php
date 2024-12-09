@@ -14,17 +14,16 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            [
-                'name' => 'OUTERWEAR',
-            ],
-            [
-                'name' => 'BOTTOMS',
-            ],
-            [
-                'name' => 'FOOTWEAR',
-            ],
+            ['name' => 'T-Shirt Casual',],
+            ['name' => 'T-Shirt Premium',],
+            ['name' => 'Jersey Baseball',],
+            ['name' => 'Casual Wear',],
+            ['name' => 'Sneakers'],
+            ['name' => 'Socks'],
+            ['name' => 'Sandals'],
+            ['name' => 'Jerseys'],
+            ['name' => 'Sweater & Hoodie'], // Tambahan kategori baru
         ];
-
 
         foreach ($categories as $category) {
             Category::insert($category);
