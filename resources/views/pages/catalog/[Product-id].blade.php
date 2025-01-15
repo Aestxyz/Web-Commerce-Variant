@@ -205,6 +205,46 @@ $addToCart = function (Product $product) {
                 </div>
             </section>
             <!-- content -->
+
+            <div class="properties section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="section-heading mb-2">
+                                <h3 id="font-custom" class="fw-bold">Rekomendasi Produk Lainnya</h3>
+                                <h6 class="text-capitalize">Temukan berbagai produk menarik yang mungkin kamu suka dan dapat
+                                    melengkapi pengalaman berbelanja kamu.</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach ($randomProduct as $product)
+                            <div class="col-lg-4 col-md-6">
+                                <div class="item">
+                                    <a href="{{ route('product-detail', ['product' => $product->id]) }}"><img
+                                            src="{{ Storage::url($product->image) }}" alt="{{ $product->title }}"
+                                            class="object-fit-cover" style="width: 100%; height: 300px;"></a>
+                                    <span class="category">
+                                        {{ Str::limit($product->category->name, 13, '...') }}
+                                    </span>
+                                    <h6>
+                                        {{ 'Rp. ' . Number::format($product->price, locale: 'id') }}
+                                    </h6>
+                                    <h4>
+                                        <a href="{{ route('product-detail', ['product' => $product->id]) }}">
+                                            {{ Str::limit($product->title, 50, '...') }}
+                                        </a>
+                                    </h4>
+                                    <div class="main-button">
+                                        <a href="{{ route('product-detail', ['product' => $product->id]) }}">Beli
+                                            Sekarang</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
         </div>
     @endvolt
 </x-guest-layout>

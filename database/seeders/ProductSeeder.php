@@ -100,23 +100,23 @@ class ProductSeeder extends Seeder
                 "category_id" => 6 // Socks
             ],
             [
-                "image" => "https://down-id.img.susercontent.com/file/id-11134207-7r98t-lz7agudtamn440_tn.webp",
-                "title" => "LOULUEN sandal pria original 100%",
-                "price" => "120000",
-                "capital" => "95000",
-                "quantity" => "40",
+                "image" => "https://down-id.img.susercontent.com/file/id-11134201-23020-ynpj6hb43lnve8.webp",
+                "title" => "Sepatu Sneakers Tricks Pria Dewasa - Putih/Hitam",
+                "price" => "202000",
+                "capital" => "147000",
+                "quantity" => "8000",
                 "weight" => "800",
-                "description" => "Sandal jepit pria anti selip dengan desain modern.",
-                "category_id" => 7 // Sandals
+                "description" => "Sepatu Sneakers Tricks Ini Didesain Untuk Menunjang Berbagai Aktifitas Anda Sehari-Hari. Bagian Atas Menggunakan Kulit Sintetis Yang Berkualitas Dan Tahan Lama. Sepatu Ini Menggunakan Sol Sintetis Direct Injection Sehingga Daya Rekat Antara Bagian Atas Dengan Sol Sangat Kuat.",
+                "category_id" => 5 // Sandals
             ],
             [
-                "image" => "https://down-id.img.susercontent.com/file/id-11134207-7rasd-m1p1ckvg6swf74_tn.webp",
-                "title" => "Skaters Sandal Gunung Mt SDL 01 Black",
-                "price" => "140000",
-                "capital" => "110000",
+                "image" => "https://down-id.img.susercontent.com/file/id-11134207-7r98x-lt0fxktavsjt5b.webp",
+                "title" => "Skaters Sandal Slide - Sol super lembut",
+                "price" => "27900",
+                "capital" => "19000",
                 "quantity" => "35",
                 "weight" => "700",
-                "description" => "Sandal gunung hitam untuk outdoor yang nyaman dan tahan lama.",
+                "description" => "Koleksi Sandal dari ada lagi nih guys, sandal yang ringan dan nyaman untuk di pakai kemana saja. Dengan model yang simple, serta warna hitam pekat yang sangat cocok untuk Propeople pakai.",
                 "category_id" => 7 // Sandals
             ],
             [
