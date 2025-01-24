@@ -102,7 +102,7 @@ $complatedOrder = fn() => $this->order->update(['status' => 'COMPLETED']);
                                     @enderror
                                 @else
                                     <button type="button" class="btn btn-primary position-relative">
-                                        {{ $order->status }}
+                                    {{ __('status.' . $order->status) }}
                                         <span
                                             class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
                                         </span>
@@ -122,9 +122,10 @@ $complatedOrder = fn() => $this->order->update(['status' => 'COMPLETED']);
                                     </div>
                                 @endif
                                 @if (
-                                    $order->status === 'PENDING' ||
-                                        $order->status === 'PICKUP' ||
-                                        ($order->status === 'PACKED' && auth()->user()->role === 'superadmin'))
+    $order->status === 'PENDING' ||
+    $order->status === 'PICKUP' ||
+    ($order->status === 'PACKED' && auth()->user()->role === 'superadmin')
+)
                                     <div class="col-auto">
                                         <button class="btn btn-danger" wire:click="cancelOrder('{{ $order->id }}')"
                                             role="button">
@@ -155,7 +156,7 @@ $complatedOrder = fn() => $this->order->update(['status' => 'COMPLETED']);
                         @if ($order->payment_method != 'COD (Cash On Delivery)' && $order->status === 'PICKUP')
                             Dan lakukan pengembalian dana kepada customer
                         @endif
-                        
+
                     </span>
                 </div>
             @endif
@@ -169,7 +170,7 @@ $complatedOrder = fn() => $this->order->update(['status' => 'COMPLETED']);
                                     <address>
                                         <h6>Pesanan Dari,</h6>
                                         <p>
-                                            {{ $order->user->name }} - {{ $order->status }} <br>
+                                            {{ $order->user->name }} - {{ __('status.' . $order->status) }} <br>
                                             {{ $order->user->email }} <br>
                                             {{ $order->user->telp }}
                                         </p>
@@ -257,12 +258,12 @@ $complatedOrder = fn() => $this->order->update(['status' => 'COMPLETED']);
                                                 <td colspan="5"> Sub - Total:</td>
                                                 <td>
                                                     {{ 'Rp.' .
-                                                        Number::format(
-                                                            $order->items->sum(function ($item) {
-                                                                return $item->qty * $item->product->price;
-                                                            }),
-                                                            locale: 'id',
-                                                        ) }}
+    Number::format(
+        $order->items->sum(function ($item) {
+            return $item->qty * $item->product->price;
+        }),
+        locale: 'id',
+    ) }}
                                                 </td>
                                             </tr>
                                             <tr class="text-end">

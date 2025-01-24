@@ -7,7 +7,7 @@
                         <address>
                             <h6>Pesanan Dari,</h6>
                             <p>
-                                {{ $order->user->name }} - {{ $order->status }} <br>
+                                {{ $order->user->name }} - {{ __('status.' . $order->status) }} <br>
                                 {{ $order->user->email }} <br>
                                 {{ $order->user->telp }}
                             </p>
@@ -43,12 +43,9 @@
                         @if ($order->payment_method == 'Transfer Bank')
                             <div class="col-md text-end">
                                 <figure class="figure">
-                                    <a href="{{ Storage::url($order->proof_of_payment) }}" data-fancybox
-                                        target="_blank">
-                                        <img src="{{ Storage::url($order->proof_of_payment) }}"
-                                            class="figure-img img-fluid rounded object-fit-cover
-                                    {{ !$order->proof_of_payment ? 'placeholder' : '' }}"
-                                            width="100" alt="...">
+                                    <a href="{{ Storage::url($order->proof_of_payment) }}" data-fancybox target="_blank">
+                                        <img src="{{ Storage::url($order->proof_of_payment) }}" class="figure-img img-fluid rounded object-fit-cover
+                                        {{ !$order->proof_of_payment ? 'placeholder' : '' }}" width="100" alt="...">
                                     </a>
                                     <figcaption class="figure-caption text-center">
                                         Bukti Pembayaran
@@ -95,12 +92,12 @@
                                     <td colspan="5"> Sub - Total:</td>
                                     <td>
                                         {{ 'Rp.' .
-                                            Number::format(
-                                                $order->items->sum(function ($item) {
-                                                    return $item->qty * $item->product->price;
-                                                }),
-                                                locale: 'id',
-                                            ) }}
+    Number::format(
+        $order->items->sum(function ($item) {
+            return $item->qty * $item->product->price;
+        }),
+        locale: 'id',
+    ) }}
                                     </td>
                                 </tr>
                                 <tr class="text-end">

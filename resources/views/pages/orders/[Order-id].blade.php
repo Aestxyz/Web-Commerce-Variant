@@ -142,7 +142,7 @@ $complatedOrder = fn() => $this->order->update(['status' => 'COMPLETED']);
                     </div>
                     <div class="col-lg-6 mt-4 mt-lg-0 align-content-center fun-facts mb-3">
                         <div class="counter float-start float-lg-end">
-                            <span id="font-custom" class="fs-4 fw-bold">{{ $order->status }}</span>
+                            <span id="font-custom" class="fs-4 fw-bold">{{ __('status.' . $order->status) }}</span>
                         </div>
                     </div>
 

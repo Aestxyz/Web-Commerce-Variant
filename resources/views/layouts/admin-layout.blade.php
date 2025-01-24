@@ -24,6 +24,11 @@
         .btn-danger {
             --bs-btn-bg: #fc3a4e;
         }
+
+        .table {
+            --bs-table-color: black;
+            font-weight: bold;
+        }
     </style>
 
     @stack('css')
