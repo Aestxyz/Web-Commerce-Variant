@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
@@ -14,10 +13,10 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['name' => 'T-Shirt Casual',],
-            ['name' => 'T-Shirt Premium',],
-            ['name' => 'Jersey Baseball',],
-            ['name' => 'Casual Wear',],
+            ['name' => 'T-Shirt Casual'],
+            ['name' => 'T-Shirt Premium'],
+            ['name' => 'Jersey Baseball'],
+            ['name' => 'Casual Wear'],
             ['name' => 'Sneakers'],
             ['name' => 'Socks'],
             ['name' => 'Sandals'],
