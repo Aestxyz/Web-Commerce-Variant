@@ -27,7 +27,7 @@
 
         .table {
             --bs-table-color: black;
-            font-weight: bold;
+            
         }
     </style>
 

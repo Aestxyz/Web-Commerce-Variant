@@ -19,42 +19,42 @@ $orders = computed(fn() => Order::query()->get());
 
 
     @volt
-        <div>
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table display table-sm">
-                            <thead>
+    <div>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table display table-sm">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Invoice</th>
+                                <th>Pembeli</th>
+                                <th>Status</th>
+                                <th>Total Belanja</th>
+                                <th>Metode Pembayaran</th>
+                                <th>Tambahan</th>
+                                <th>Jumlah </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($this->orders as $no => $order)
                                 <tr>
-                                    <th>No.</th>
-                                    <th>Invoice</th>
-                                    <th>Pembeli</th>
-                                    <th>Status</th>
-                                    <th>Total Belanja</th>
-                                    <th>Metode Pembayaran</th>
-                                    <th>Tambahan</th>
-                                    <th>Jumlah </th>
+                                    <td>{{ ++$no }}.</td>
+                                    <td>{{ $order->invoice }}</td>
+                                    <td>{{ $order->user->name }}</td>
+                                    <td>{{ __('status.' . $order->status) }}</td>
+                                    <td>{{ 'Rp. ' . Number::format($order->total_amount, locale: 'id') }}
+                                    </td>
+                                    <td>{{ $order->payment_method }}</td>
+                                    <td>{{ $order->protect_cost == 1 ? 'Bubble Wrap' : '-' }}</td>
+                                    <td>{{ $order->items->count() }} Barang</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($this->orders as $no => $order)
-                                    <tr>
-                                        <td>{{ ++$no }}.</td>
-                                        <td>{{ $order->invoice }}</td>
-                                        <td>{{ $order->user->name }}</td>
-                                        <td>{{ $order->status }}</td>
-                                        <td>{{ 'Rp. ' . Number::format($order->total_amount, locale: 'id') }}
-                                        </td>
-                                        <td>{{ $order->payment_method }}</td>
-                                        <td>{{ $order->protect_cost == 1 ? 'Bubble Wrap' : '-' }}</td>
-                                        <td>{{ $order->items->count() }} Barang</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+    </div>
     @endvolt
 </x-admin-layout>

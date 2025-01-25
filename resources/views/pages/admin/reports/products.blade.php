@@ -19,38 +19,36 @@ $products = computed(fn() => Product::latest()->get());
         <li class="breadcrumb-item"><a href="{{ route('report.products') }}">Laporan Produk</a></li>
     </x-slot>
     @volt
-        <div>
+    <div>
 
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table display table-sm">
-                            <thead>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table display table-sm ">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Nama Produk</th>
+                                <th>Harga</th>
+                                <th>Berat Produk</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($this->products as $no => $product)
                                 <tr>
-                                    <th>No.</th>
-                                    <th>Nama Produk</th>
-                                    <th>Harga</th>
-                                    <th>Jumlah / Stok</th>
-                                    <th>Berat Produk</th>
+                                    <td>{{ ++$no }}</td>
+                                    <td>{{ Str::limit($product->title, 40, '...') }}</td>
+                                    <td>{{ 'Rp. ' . Number::format($product->price, locale: 'id') }}</td>
+                                    <td>{{ $product->weight }} gram</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($this->products as $no => $product)
-                                    <tr>
-                                        <td>{{ ++$no }}</td>
-                                        <td>{{ Str::limit($product->title, 40, '...') }}</td>
-                                        <td>{{ 'Rp. ' . Number::format($product->price, locale: 'id') }}</td>
-                                        <td>Tersedia</td>
-                                        <td>{{ $product->weight }} gram</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
-
         </div>
+
+
+    </div>
     @endvolt
 </x-admin-layout>
