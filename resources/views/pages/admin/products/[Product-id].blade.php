@@ -4,6 +4,7 @@ use function Livewire\Volt\{state, rules, usesFileUploads, uses, computed};
 use function Laravel\Folio\name;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Image;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 uses([LivewireAlert::class]);
@@ -22,6 +23,8 @@ state([
     'productId' => fn() => $this->product->id,
     'thumbnail',
     'product',
+
+    'images' => [],
 ]);
 
 $profit = computed(function () {
@@ -45,6 +48,24 @@ rules([
     'description' => 'required|min:10',
 ]);
 
+$updatingImages = function ($value) {
+    $this->previmages = $this->images;
+};
+
+$updatedImages = function ($value) {
+    $this->images = array_merge($this->previmages, $value);
+};
+
+$removeItem = function ($key) {
+    if (isset($this->images[$key])) {
+        $file = $this->images[$key];
+        $file->delete();
+        unset($this->images[$key]);
+    }
+
+    $this->images = array_values($this->images);
+};
+
 $save = function () {
     $validate = $this->validate();
     if ($this->thumbnail) {
@@ -53,14 +74,54 @@ $save = function () {
     } else {
         $validate['thumbnail'] = $this->product->thumbnail;
     }
-    product::whereId($this->product->id)->update($validate);
 
-    $this->alert('success', 'Penginputan produk toko telah selesai dan lengkapi dengan menambahkan varian produk!', [
-        'position' => 'top',
-        'width' => '500',
-        'toast' => true,
-        'timerProgressBar' => true,
-    ]);
+    $product = Product::find($this->product->id);
+
+    if ($product) {
+        $product->update($validate);
+
+        if (count($this->images) > 0) {
+            $this->validate([
+                'images' => 'nullable',
+                'images.*' => 'image|max:2048',
+            ]);
+
+            $images = Image::where('product_id', $product->id)->get();
+
+            if ($images->isNotEmpty()) {
+                foreach ($images as $image) {
+                    Storage::delete($image->image_path);
+                    $image->delete();
+                }
+            }
+
+            foreach ($this->images as $image) {
+                $path = $image->store('fields', 'public');
+                Image::create([
+                    'product_id' => $product->id,
+                    'image_path' => $path,
+                ]);
+
+                $image->delete();
+            }
+        }
+
+        $this->alert('success', 'Penginputan produk toko telah selesai dan lengkapi dengan menambahkan varian produk!', [
+            'position' => 'top',
+            'width' => '500',
+            'toast' => true,
+            'timerProgressBar' => true,
+        ]);
+    } else {
+        $this->alert('error', 'Produk tidak ditemukan!', [
+            'position' => 'top',
+            'width' => '500',
+            'toast' => true,
+            'timerProgressBar' => true,
+        ]);
+    }
+
+    $this->redirectRoute('products.edit', ['product' => $product->id]);
 };
 
 $redirectProductsPage = function () {
@@ -176,6 +237,65 @@ $redirectProductsPage = function () {
                                     @enderror
                                 </div>
 
+                            </div>
+
+                            <div class="col-12">
+                                @if ($images)
+                                    <div class="mb-3 row d-flex flex-nowrap gap-1 overflow-auto">
+                                        @foreach ($images as $key => $image)
+                                            <div class="col-3">
+                                                <div class="card position-relative mt-6" style="width: 200px;">
+                                                    <div class="card-img-top">
+                                                        <img src="{{ $image->temporaryUrl() }}" class="img rounded"
+                                                            style="object-fit: cover;" width="200px" height="200px"
+                                                            alt="preview">
+                                                        <a type="button"
+                                                            class="position-absolute top-0 start-100 translate-middle p-2"
+                                                            wire:click.prevent='removeItem({{ json_encode($key) }})'>
+                                                            <i
+                                                                class="bx bx-x p-2 rounded-circle fs-1 text-white bg-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @elseif($product->images->isNotEmpty())
+                                    <div class="mb-3 row d-flex flex-nowrap gap-1 overflow-auto">
+                                        @foreach ($product->images as $key => $image)
+                                            <div class="col-3">
+                                                <div class="card position-relative" style="width: 200px;">
+                                                    <div class="card-img-top">
+                                                        <img src="{{ Storage::url($image->image_path) }}"
+                                                            class="img rounded" style="object-fit: cover;" width="200px"
+                                                            height="200px" alt="preview">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="images" class="form-label">
+                                    Gambar Lainnya
+                                    <span wire:loading.remove.class="d-none"
+                                        class="d-none ms-2 spinner-border spinner-border-sm"></span>
+                                </label>
+                                <p>
+                                    <small>Gambar tersimpan
+                                        <span class="text-danger">(Jika tidak mengubah gambar, tidak perlu melakukan
+                                            input gambar)</span>
+                                        .
+                                    </small>
+                                </p>
+                                <input type="file" class="form-control @error('images') is-invalid @enderror"
+                                    wire:model="images" id="images" aria-describedby="imagesId" autocomplete="images"
+                                    accept="image/*" multiple />
+                                @error('images')
+                                    <small id="imagesId" class="form-text text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
 
                             <div class="mb-3">

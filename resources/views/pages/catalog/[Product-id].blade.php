@@ -40,9 +40,7 @@ $selectVariant = function (Variant $variant) {
 
 $addToCart = function (Product $product) {
     if (Auth::check() && auth()->user()->role == 'customer') {
-        $existingCart = Cart::where('user_id', $this->user_id)
-            ->where('variant_id', $this->variant_id)
-            ->first();
+        $existingCart = Cart::where('user_id', $this->user_id)->where('variant_id', $this->variant_id)->first();
 
         $stock = $this->variant_stock;
 
@@ -95,7 +93,7 @@ $addToCart = function (Product $product) {
 ?>
 <x-guest-layout>
     <x-slot name="title">Product {{ $product->title }}</x-slot>
-
+    @include('layouts.fancybox')
     @volt
         <div>
             <section class="pt-5">
@@ -121,12 +119,27 @@ $addToCart = function (Product $product) {
                 <div class="container">
                     <div class="row gx-2">
                         <aside class="col-lg-6">
-                            <div class="border rounded-4 mb-3 d-flex justify-content-center">
-                                <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image"
-                                    href="{{ Storage::url($product->image) }}">
-                                    <img class="p-4 object-fit-cover rounded-5" style="width: 100%;"
-                                        src="{{ Storage::url($product->image) }}" />
+                            <div class="card rounded-4 mb-3" style="width: 100%; height: 550px">
+                                <a href="{{ Storage::url($product->thumbnail) }}" data-fancybox
+                                    data-src="{{ Storage::url($product->thumbnail) }}">
+                                    <img class="card-img-top" src="{{ Storage::url($product->thumbnail) }}" width=100%;
+                                        height=550px; style="object-fit: cover;" alt="card-img-top">
                                 </a>
+                            </div>
+
+                            <div class="d-flex flex-row gap-1 overflow-auto">
+                                @foreach ($product->images as $imageItem)
+                                    <div class="col">
+                                        <div class="card rounded-4 mb-3" style="width: 100px; height: 100px">
+                                            <a href="{{ Storage::url($imageItem->image_path) }}" data-fancybox="gallery"
+                                                data-caption="{{ $product->title }}">
+                                                <img class="card-img-top" src="{{ Storage::url($imageItem->image_path) }}"
+                                                    width=100px; height=100px; style="object-fit: cover;"
+                                                    alt="other images">
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </aside>
                         <main class="col-lg-6">
@@ -152,23 +165,23 @@ $addToCart = function (Product $product) {
 
                                     <dt class="col-3 mb-2">Stok:</dt>
                                     <dd class="col-9 mb-2">
-                                        {{ $variant . ' - ' . $variant_type }}</dd>
+                                        {{ $variant ?? '-' }}</dd>
 
-                                    <dt class="col-3 mb-2">Varian</dt>
-                                    <dd class="col-9 mb-2">
-                                        <div class="row gap-3">
+                                    <dt class="col-3 mb-2">Varian:</dt>
+                                    <dd class="col-9 mb-2">{{ $variant_type ?? '-' }}</dd>
+                                </div>
 
-                                            @foreach ($product->variants as $variant)
-                                                <div class="col-auto">
-                                                    <button wire:key='{{ $variant->id }}'
-                                                        wire:click='selectVariant({{ $variant->id }})' type="button"
-                                                        class="badge rounded-pill" style="color: #f35525;">
-                                                        {{ $variant->type }}
-                                                    </button>
-                                                </div>
-                                            @endforeach
+                                <div class="row mt-3">
+                                    <p>Varian produk tersedia:</p>
+                                    @foreach ($product->variants as $variant)
+                                        <div class="col-6 mb-3">
+                                            <button wire:key='{{ $variant->id }}'
+                                                wire:click='selectVariant({{ $variant->id }})' type="button"
+                                                class="btn btn-outline-light w-100 tex-center" style="color: #f35525;">
+                                                {{ $variant->type }}
+                                            </button>
                                         </div>
-                                    </dd>
+                                    @endforeach
                                 </div>
 
 
@@ -222,7 +235,7 @@ $addToCart = function (Product $product) {
                             <div class="col-lg-4 col-md-6">
                                 <div class="item">
                                     <a href="{{ route('product-detail', ['product' => $product->id]) }}"><img
-                                            src="{{ Storage::url($product->image) }}" alt="{{ $product->title }}"
+                                            src="{{ Storage::url($product->thumbnail) }}" alt="{{ $product->title }}"
                                             class="object-fit-cover" style="width: 100%; height: 300px;"></a>
                                     <span class="category">
                                         {{ Str::limit($product->category->name, 13, '...') }}

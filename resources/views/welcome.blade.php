@@ -84,7 +84,7 @@ state([
                             <div class="col-lg-4 col-md-6">
                                 <div class="item">
                                     <a href="{{ route('product-detail', ['product' => $product->id]) }}"><img
-                                            src="{{ Storage::url($product->image) }}" alt="{{ $product->title }}"
+                                            src="{{ Storage::url($product->thumbnail) }}" alt="{{ $product->title }}"
                                             class="object-fit-cover" style="width: 100%; height: 300px;"></a>
                                     <span class="category">
                                         {{ Str::limit($product->category->name, 13, '...') }}
@@ -123,7 +123,7 @@ state([
                         <div class="col-lg-4">
                             <div class="btn btn-outline-light rounded-5 shadow mb-4 p-4">
                                 <i class="bi bi-star text-primary" style="font-size: 2rem;"></i>
-                                <p class="fs-3 fw-bolder my-3">Kualitas Terbaik</p>
+                                <p id="font-custom" class="fs-3 fw-bolder my-3">Kualitas Terbaik</p>
                                 <p>Setiap produk kami dibuat dari bahan pilihan untuk memastikan
                                     kenyamanan maksimal.</p>
                             </div>
@@ -131,7 +131,7 @@ state([
                         <div class="col-lg-4">
                             <div class="btn btn-outline-light rounded-5 shadow mb-4 p-4">
                                 <i class="bi bi-truck text-primary" style="font-size: 2rem;"></i>
-                                <p class="fs-3 fw-bolder my-3">Pengiriman Cepat</p>
+                                <p id="font-custom" class="fs-3 fw-bolder my-3">Pengiriman Cepat</p>
                                 <p>Kami bekerja sama dengan jasa pengiriman terpercaya untuk memastikan
                                     produk sampai tepat waktu.</p>
                             </div>
@@ -139,7 +139,7 @@ state([
                         <div class="col-lg-4">
                             <div class="btn btn-outline-light rounded-5 shadow mb-4 p-4">
                                 <i class="bi bi-wallet2 text-primary" style="font-size: 2rem;"></i>
-                                <p class="fs-3 fw-bolder my-3">Harga Terjangkau</p>
+                                <p id="font-custom" class="fs-3 fw-bolder my-3">Harga Terjangkau</p>
                                 <p>Dapatkan produk premium dengan harga yang bersahabat di kantong.</p>
                             </div>
                         </div>

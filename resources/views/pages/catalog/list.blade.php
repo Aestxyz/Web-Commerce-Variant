@@ -95,7 +95,7 @@ $products = computed(function () {
                             <div class="col-lg-4 col-md-6">
                                 <div class="item">
                                     <a href="{{ route('product-detail', ['product' => $product->id]) }}"><img
-                                            src="{{ Storage::url($product->image) }}" alt="{{ $product->title }}"
+                                            src="{{ Storage::url($product->thumbnail) }}" alt="{{ $product->title }}"
                                             class="object-fit-cover" style="width: 100%; height: 300px;"></a>
                                     <span class="category">
                                         {{ Str::limit($product->category->name, 13, '...') }}

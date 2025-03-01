@@ -3,7 +3,7 @@
 use function Livewire\Volt\{state, rules, usesFileUploads, computed, uses};
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Variant;
+use App\Models\Image;
 use function Laravel\Folio\name;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -21,6 +21,10 @@ state([
     'thumbnail',
     'weight',
     'description',
+
+    // upload image
+    'images' => [],
+    'previmages',
 ]);
 
 rules([
@@ -35,6 +39,9 @@ rules([
     'thumbnail' => 'required',
     'weight' => 'required|numeric',
     'description' => 'required|min:10',
+
+    'images' => 'required', // Validasi file gambar
+    'images.*' => 'image|max:2048', // Validasi file gambar
 ]);
 
 $profit = computed(function () {
@@ -46,6 +53,24 @@ $profit = computed(function () {
 
 $redirectProductsPage = function () {
     $this->redirectRoute('products.index');
+};
+
+$updatingImages = function ($value) {
+    $this->previmages = $this->images;
+};
+
+$updatedImages = function ($value) {
+    $this->images = array_merge($this->previmages, $value);
+};
+
+$removeItem = function ($key) {
+    if (isset($this->images[$key])) {
+        $file = $this->images[$key];
+        $file->delete();
+        unset($this->images[$key]);
+    }
+
+    $this->images = array_values($this->images);
 };
 
 $createdProduct = function () {
@@ -60,6 +85,17 @@ $createdProduct = function () {
         $product->update($validate);
     }
 
+    // Simpan Images
+    foreach ($this->images as $image) {
+        $path = $image->store('products', 'public'); // Simpan ke folder "products" di storage
+        Image::create([
+            'product_id' => $product->id,
+            'image_path' => $path,
+        ]);
+
+        $image->delete();
+    }
+
     $this->alert('success', 'Penginputan produk toko telah selesai dan lengkapi dengan menambahkan varian produk!', [
         'position' => 'center',
         'width' => '500',
@@ -67,6 +103,10 @@ $createdProduct = function () {
         'toast' => true,
         'timerProgressBar' => true,
     ]);
+
+    $this->redirectRoute('products.edit', ['product' => $product->id]);
+
+    $this->reset(['images', 'previmages']);
 };
 
 ?>
@@ -174,25 +214,64 @@ $createdProduct = function () {
 
                             </div>
 
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Penjelasan Produk</label>
-                                <textarea class="form-control @error('description') is-invalid @enderror" wire:model="description" id="description"
-                                    aria-describedby="descriptionId" placeholder="Enter product description" rows="8"></textarea>
+                            <div class="col-12">
+                                @if ($images)
+                                    <div class="mb-3 row d-flex flex-nowrap gap-2 overflow-auto">
+                                        @foreach ($images as $key => $image)
+                                            <div class="col-3 my-3 mx-2">
+                                                <div class="card position-relative" style="width: 200px;">
+                                                    <div class="card-img-top">
+                                                        <img src="{{ $image->temporaryUrl() }}" class="img rounded"
+                                                            style="object-fit: cover;" width="200px" height="200px"
+                                                            alt="preview">
+                                                        <a type="button"
+                                                            class="position-absolute top-0 start-100 translate-middle p-2"
+                                                            wire:click.prevent='removeItem({{ json_encode($key) }})'>
+                                                            <i
+                                                                class="bx bx-x p-2 rounded-circle fs-5 text-white bg-danger"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
 
-                                @error('description')
-                                    <small id="descriptionId" class="form-text text-danger">{{ $message }}</small>
-                                @enderror
+
+
+                                <div class="mb-3">
+                                    <label for="images" class="form-label">
+                                        Gambar Lainnya
+                                        <span wire:loading.remove.class="d-none"
+                                            class="d-none ms-2 spinner-border spinner-border-sm"></span>
+                                    </label>
+                                    <input type="file" class="form-control @error('images') is-invalid @enderror"
+                                        wire:model="images" id="images" aria-describedby="imagesId"
+                                        autocomplete="images" accept="image/*" multiple />
+                                    @error('images')
+                                        <small id="imagesId" class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Penjelasan Produk</label>
+                                    <textarea class="form-control @error('description') is-invalid @enderror" wire:model="description" id="description"
+                                        aria-describedby="descriptionId" placeholder="Enter product description" rows="8"></textarea>
+
+                                    @error('description')
+                                        <small id="descriptionId" class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="text-start">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ $productId == null ? 'Submit' : 'Edit' }}
+                                    </button>
+                                    <x-action-message wire:loading on="save">
+                                        <span class="spinner-border spinner-border-sm"></span>
+                                    </x-action-message>
+                                </div>
                             </div>
-
-
-                            <div class="text-start">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ $productId == null ? 'Submit' : 'Edit' }}
-                                </button>
-                                <x-action-message wire:loading on="save">
-                                    <span class="spinner-border spinner-border-sm"></span>
-                                </x-action-message>
-                            </div>
+                        </div>
                     </form>
                 </div>
 
