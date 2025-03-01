@@ -20,7 +20,7 @@ state([
     'weight' => fn() => $this->product->weight,
     'description' => fn() => $this->product->description,
     'productId' => fn() => $this->product->id,
-    'image',
+    'thumbnail',
     'product',
 ]);
 
@@ -40,18 +40,18 @@ rules([
         'numeric',
         'gte:capital', // Validasi bahwa harga jual tidak boleh kurang dari harga modal
     ],
-    'image' => 'nullable',
+    'thumbnail' => 'nullable',
     'weight' => 'required|numeric',
     'description' => 'required|min:10',
 ]);
 
 $save = function () {
     $validate = $this->validate();
-    if ($this->image) {
-        $validate['image'] = $this->image->store('public/images');
-        Storage::delete($this->product->image);
+    if ($this->thumbnail) {
+        $validate['thumbnail'] = $this->thumbnail->store('public/thumbnails');
+        Storage::delete($this->product->thumbnail);
     } else {
-        $validate['image'] = $this->product->image;
+        $validate['thumbnail'] = $this->product->thumbnail;
     }
     product::whereId($this->product->id)->update($validate);
 
@@ -85,12 +85,12 @@ $redirectProductsPage = function () {
                         @csrf
                         <div class="row">
                             <div class="col-md mb-3">
-                                @if ($image)
-                                    <img src="{{ $image->temporaryUrl() }}" class="img rounded object-fit-cover"
-                                        alt="image" loading="lazy" height="625px" width="100%" />
-                                @elseif ($product->image)
-                                    <img src="{{ Storage::url($product->image) }}" class="img rounded object-fit-cover"
-                                        alt="image" loading="lazy" height="625px" width="100%" />
+                                @if ($thumbnail)
+                                    <img src="{{ $thumbnail->temporaryUrl() }}" class="img rounded object-fit-cover"
+                                        alt="thumbnail" loading="lazy" height="625px" width="100%" />
+                                @elseif ($product->thumbnail)
+                                    <img src="{{ Storage::url($product->thumbnail) }}" class="img rounded object-fit-cover"
+                                        alt="thumbnail" loading="lazy" height="625px" width="100%" />
                                 @endif
                             </div>
                             <div class="col-md">
@@ -137,13 +137,13 @@ $redirectProductsPage = function () {
 
 
                                 <div class="mb-3">
-                                    <label for="image" class="form-label">Gambar Produk</label>
-                                    <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                        wire:model="image" id="image" aria-describedby="imageId"
-                                        placeholder="Enter product image"
+                                    <label for="thumbnail" class="form-label">Gambar Produk</label>
+                                    <input type="file" class="form-control @error('thumbnail') is-invalid @enderror"
+                                        wire:model="thumbnail" id="thumbnail" aria-describedby="thumbnailId"
+                                        placeholder="Enter product thumbnail"
                                         {{ auth()->user()->role == 'superadmin' ?: 'disabled' }} />
-                                    @error('image')
-                                        <small id="imageId" class="form-text text-danger">{{ $message }}</small>
+                                    @error('thumbnail')
+                                        <small id="thumbnailId" class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
 

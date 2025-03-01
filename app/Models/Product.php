@@ -16,7 +16,7 @@ class Product extends Model
         'title',
         'capital',
         'price',
-        'image',
+        'thumbnail',
         'weight',
         'description',
     ];
@@ -59,5 +59,10 @@ class Product extends Model
     public function variants(): HasMany
     {
         return $this->hasMany(Variant::class);
+    }
+
+    public function images()        
+    {
+        return $this->hasMany(Image::class);
     }
 }

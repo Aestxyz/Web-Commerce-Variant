@@ -18,7 +18,7 @@ state([
     'title',
     'capital',
     'price',
-    'image',
+    'thumbnail',
     'weight',
     'description',
 ]);
@@ -32,7 +32,7 @@ rules([
         'numeric',
         'gte:capital', // Validasi bahwa harga jual tidak boleh kurang dari harga modal
     ],
-    'image' => 'required',
+    'thumbnail' => 'required',
     'weight' => 'required|numeric',
     'description' => 'required|min:10',
 ]);
@@ -50,7 +50,7 @@ $redirectProductsPage = function () {
 
 $createdProduct = function () {
     $validate = $this->validate();
-    $validate['image'] = $this->image->store('public/images');
+    $validate['thumbnail'] = $this->thumbnail->store('public/thumbnails');
 
     if ($this->productId == null) {
         $product = Product::create($validate);
@@ -88,11 +88,11 @@ $createdProduct = function () {
                         @csrf
                         <div class="row">
                             <div class="col-md mb-3">
-                                @if ($image)
-                                    <img src="{{ $image->temporaryUrl() }}" class="img rounded object-fit-cover"
-                                        alt="image" loading="lazy" height="625px" width="100%" />
+                                @if ($thumbnail)
+                                    <img src="{{ $thumbnail->temporaryUrl() }}" class="img rounded object-fit-cover"
+                                        alt="thumbnail" loading="lazy" height="625px" width="100%" />
                                 @else
-                                    <img src="" class="img rounded object-fit-cover placeholder " alt="image"
+                                    <img src="" class="img rounded object-fit-cover placeholder " alt="thumbnail"
                                         loading="lazy" height="625px" width="100%" />
                                 @endif
                             </div>
@@ -136,12 +136,12 @@ $createdProduct = function () {
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="image" class="form-label">Gambar Produk</label>
-                                    <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                        wire:model="image" id="image" aria-describedby="imageId"
-                                        placeholder="Enter product image" />
-                                    @error('image')
-                                        <small id="imageId" class="form-text text-danger">{{ $message }}</small>
+                                    <label for="thumbnail" class="form-label">Gambar Produk</label>
+                                    <input type="file" class="form-control @error('thumbnail') is-invalid @enderror"
+                                        wire:model="thumbnail" id="thumbnail" aria-describedby="thumbnailId"
+                                        placeholder="Enter product thumbnail" />
+                                    @error('thumbnail')
+                                        <small id="thumbnailId" class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
 

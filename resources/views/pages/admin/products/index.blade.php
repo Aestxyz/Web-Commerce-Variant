@@ -82,7 +82,7 @@ $destroy = function (product $product) {
                                 @foreach ($this->products as $no => $product)
                                     <tr>
                                         <th>{{ ++$no }}</th>
-                                        <th>{{ $product->title }}</th>
+                                        <th>{{ Str::limit($product->title, 50, '...') }}</th>
                                         <th>{{ 'Rp.' . Number::format($product->price, locale: 'id') }}</th>
                                         <th>
                                             <a href="{{ route('products.edit', ['product' => $product->id]) }}"

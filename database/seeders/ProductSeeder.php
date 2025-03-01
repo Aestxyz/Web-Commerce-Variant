@@ -18,7 +18,7 @@ class ProductSeeder extends Seeder
     {
         $data = [
             [
-                'image' => 'https://down-id.img.susercontent.com/file/sg-11134201-7qvdy-lj2pp8i3uo0d26_tn.webp',
+                'thumbnail' => 'https://down-id.img.susercontent.com/file/sg-11134201-7qvdy-lj2pp8i3uo0d26_tn.webp',
                 'title' => 'Epidemic T-Shirt American Cotton 20s Armless Black',
                 'price' => '102000',
                 'capital' => '85000',
@@ -28,7 +28,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 1, // T-Shirt Casual
             ],
             [
-                'image' => 'https://down-id.img.susercontent.com/file/id-11134207-7r98v-ltdgf5vpmz4954_tn.webp',
+                'thumbnail' => 'https://down-id.img.susercontent.com/file/id-11134207-7r98v-ltdgf5vpmz4954_tn.webp',
                 'title' => 'SUNDAYROSE T-Shirt Oversize Kaos Drink Steel Blue',
                 'price' => '89000',
                 'capital' => '70000',
@@ -38,7 +38,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 1, // T-Shirt Casual
             ],
             [
-                'image' => 'https://down-id.img.susercontent.com/file/id-11134207-7rasl-m2d9dpfmoxc3ed_tn.webp',
+                'thumbnail' => 'https://down-id.img.susercontent.com/file/id-11134207-7rasl-m2d9dpfmoxc3ed_tn.webp',
                 'title' => 'Skaters DS Baseball Jersey XK007 Black',
                 'price' => '199000',
                 'capital' => '150000',
@@ -48,7 +48,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 3, // Jersey Baseball
             ],
             [
-                'image' => 'https://down-id.img.susercontent.com/file/id-11134207-7rasj-m13rppmz5qo171_tn.webp',
+                'thumbnail' => 'https://down-id.img.susercontent.com/file/id-11134207-7rasj-m13rppmz5qo171_tn.webp',
                 'title' => 'Skaters Jersey Mets 80 XI004 White',
                 'price' => '140000',
                 'capital' => '110000',
@@ -58,7 +58,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 3, // Jersey Baseball
             ],
             [
-                'image' => 'https://down-id.img.susercontent.com/file/id-11134207-7rasg-m1do1jtjjq9120_tn.webp',
+                'thumbnail' => 'https://down-id.img.susercontent.com/file/id-11134207-7rasg-m1do1jtjjq9120_tn.webp',
                 'title' => 'Skaters Baseball Jersey Flat XI033 Green',
                 'price' => '155000',
                 'capital' => '120000',
@@ -68,7 +68,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 3, // Jersey Baseball
             ],
             [
-                'image' => 'https://down-id.img.susercontent.com/file/id-11134201-7r992-lr3ytgeeb7dta0_tn.webp',
+                'thumbnail' => 'https://down-id.img.susercontent.com/file/id-11134201-7r992-lr3ytgeeb7dta0_tn.webp',
                 'title' => 'VOLCOM - MSN ROCKER 2 STY',
                 'price' => '250000',
                 'capital' => '200000',
@@ -78,7 +78,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 1, // T-Shirt Casual
             ],
             [
-                'image' => 'https://down-id.img.susercontent.com/file/id-11134207-7r992-lqwgotpu1ufac5_tn.webp',
+                'thumbnail' => 'https://down-id.img.susercontent.com/file/id-11134207-7r992-lqwgotpu1ufac5_tn.webp',
                 'title' => 'Carhartt WIP x New Balance MADE in USA 990v6 Original',
                 'price' => '3500000',
                 'capital' => '3200000',
@@ -88,7 +88,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 5, // Sneakers
             ],
             [
-                'image' => 'https://down-id.img.susercontent.com/file/id-11134207-7r98u-lp7tsstvcw3y46_tn.webp',
+                'thumbnail' => 'https://down-id.img.susercontent.com/file/id-11134207-7r98u-lp7tsstvcw3y46_tn.webp',
                 'title' => 'KAOS KAKI SKATERS WG033 (PUTIH), WG034 (HITAM), WG035 (ABU)',
                 'price' => '45000',
                 'capital' => '30000',
@@ -98,7 +98,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 6, // Socks
             ],
             [
-                'image' => 'https://down-id.img.susercontent.com/file/id-11134201-23020-ynpj6hb43lnve8.webp',
+                'thumbnail' => 'https://down-id.img.susercontent.com/file/id-11134201-23020-ynpj6hb43lnve8.webp',
                 'title' => 'Sepatu Sneakers Tricks Pria Dewasa - Putih/Hitam',
                 'price' => '202000',
                 'capital' => '147000',
@@ -108,7 +108,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 5, // Sandals
             ],
             [
-                'image' => 'https://down-id.img.susercontent.com/file/id-11134207-7r98x-lt0fxktavsjt5b.webp',
+                'thumbnail' => 'https://down-id.img.susercontent.com/file/id-11134207-7r98x-lt0fxktavsjt5b.webp',
                 'title' => 'Skaters Sandal Slide - Sol super lembut',
                 'price' => '27900',
                 'capital' => '19000',
@@ -118,7 +118,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 7, // Sandals
             ],
             [
-                'image' => 'https://down-id.img.susercontent.com/file/id-11134207-7r98w-lxxs43zl4hhmfb_tn.webp',
+                'thumbnail' => 'https://down-id.img.susercontent.com/file/id-11134207-7r98w-lxxs43zl4hhmfb_tn.webp',
                 'title' => '(LW) LifeWork Sweatshirt Life Work Big Radog T-shirt Kaos Oversize Basic Tee Black Big Logo',
                 'price' => '940499',
                 'capital' => '800000',
@@ -128,7 +128,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 1, // T-Shirt Casual
             ],
             [
-                'image' => 'https://down-id.img.susercontent.com/file/c1e6f8d5688785aff2a964016bf42b7a_tn.webp',
+                'thumbnail' => 'https://down-id.img.susercontent.com/file/c1e6f8d5688785aff2a964016bf42b7a_tn.webp',
                 'title' => 'Skaters Crewneck Title VF037 Black',
                 'price' => '150000',
                 'capital' => '120000',
@@ -138,7 +138,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 4, // Casual Wear
             ],
             [
-                'image' => 'https://down-id.img.susercontent.com/file/id-11134207-7qul1-lk7la9y2gq3faa_tn.webp',
+                'thumbnail' => 'https://down-id.img.susercontent.com/file/id-11134207-7qul1-lk7la9y2gq3faa_tn.webp',
                 'title' => 'Skaters Crewneck Respect WB093 Black',
                 'price' => '145000',
                 'capital' => '115000',
@@ -148,7 +148,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 4, // Casual Wear
             ],
             [
-                'image' => 'https://down-id.img.susercontent.com/file/b184e551ed6fb2b7f5834bfa957a5d38_tn.webp',
+                'thumbnail' => 'https://down-id.img.susercontent.com/file/b184e551ed6fb2b7f5834bfa957a5d38_tn.webp',
                 'title' => 'Switer Crewneck Terbaru 2024, Switer crewneck SKATERS distro pria-wanita, kualitas premium bahan tebal.',
                 'price' => '78850',
                 'capital' => '60000',
@@ -158,7 +158,7 @@ class ProductSeeder extends Seeder
                 'category_id' => 4, // Casual Wear
             ],
             [
-                'image' => 'https://down-id.img.susercontent.com/file/id-11134207-7r98v-lof7bcfrxls0c3_tn.webp',
+                'thumbnail' => 'https://down-id.img.susercontent.com/file/id-11134207-7r98v-lof7bcfrxls0c3_tn.webp',
                 'title' => 'Skaters Oversized Sweater Hoodie Athletic WK034 Navy',
                 'price' => '295000',
                 'capital' => '250000',
@@ -171,9 +171,9 @@ class ProductSeeder extends Seeder
 
         foreach ($data as $item) {
             // Upload gambar dari URL ke folder storage
-            $imageContents = file_get_contents($item['image']);
-            $imageName = basename($item['image']);
-            $storagePath = 'images/'.$imageName;
+            $imageContents = file_get_contents($item['thumbnail']);
+            $imageName = basename($item['thumbnail']);
+            $storagePath = 'thumbnails/'.$imageName;
             Storage::disk('public')->put($storagePath, $imageContents);
 
             // Buat record produk di database
@@ -183,7 +183,7 @@ class ProductSeeder extends Seeder
                 'capital' => $item['capital'],
                 'price' => $item['price'],
                 'quantity' => 0,
-                'image' => $storagePath,
+                'thumbnail' => $storagePath,
                 'weight' => $item['weight'],
                 'description' => $item['description'],
             ]);
