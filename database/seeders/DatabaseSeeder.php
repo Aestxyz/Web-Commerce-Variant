@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         Artisan::call('rajaongkir:seed');
 
         \App\Models\Shop::create([
-            'name' => 'DS STORE 08',
+            'name' => 'DREAM SUMMER STORE',
             'province_id' => 8,
             'city_id' => 156,
             'details' => 'Lorem ipsum dolor sit amet consectetur adipiscing elit vehicula rutrum inceptos, euismod augue nisl penatibus cursus metus accumsan rhoncus vel risus leo, torquent praesent est malesuada litora primis eros eu nam.',
