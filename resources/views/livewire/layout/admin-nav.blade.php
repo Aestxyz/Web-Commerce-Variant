@@ -24,7 +24,7 @@ on([
 <div>
     <div class="brand-logo d-flex align-items-center justify-content-between">
         <a href="#" class="text-nowrap logo-img">
-            <h4 style="font-weight: 900" class="ms-lg-2 text-primary">
+            <h6 style="font-weight: 900" class="ms-lg-2 text-primary">
                 {{ $this->profileShop->name }}
             </h4>
         </a>
