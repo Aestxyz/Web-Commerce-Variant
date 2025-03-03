@@ -1,59 +1,69 @@
+@include('layouts.fancybox')
+
 <div class="card d-print-block border-0">
     <div class="card-body">
         <div class="invoice-123" id="printableArea" style="display: block;">
             <div class="row pt-3">
                 <div class="col-md-12">
-                    <div>
-                        <address>
-                            <h6>Pesanan Dari,</h6>
-                            <p>
-                                {{ $order->user->name }} - {{ __('status.' . $order->status) }} <br>
-                                {{ $order->user->email }} <br>
-                                {{ $order->user->telp }}
-                            </p>
-                            <h6>
-                                {{ $order->user->address->province->name }},
-                                {{ $order->user->address->city->name }} <br>
-                            </h6>
-                            <p>
-                                {{ $order->user->address->details }}
-                            </p>
-                        </address>
-                    </div>
-                    <hr>
                     <div class="row">
-                        <div class="col-md">
-                            <h6>Nomor Faktur:
-                                {{ $order->invoice }}
-                            </h6>
-                            <h6>Nomor Resi Pesanan:
-                                {{ $order->tracking_number ?? '-' }}
-                            </h6>
-                            <h6>Pengiriman:
-                                {{ $order->courier }}
-                            </h6>
-                            <h6>Tambahan:
-                                {{ $order->protect_cost == true ? 'Bubble Wrap' : '-' }}
-                            </h6>
+                        <div class="col-6">
+                            <div>
+                                <address>
+                                    <h6>Pesanan Dari,</h6>
+                                    <p>
+                                        {{ $order->user->name }} - {{ __('status.' . $order->status) }} <br>
+                                        {{ $order->user->email }} <br>
+                                        {{ $order->user->telp }}
+                                    </p>
+                                    <h6 class="mt-1">Alamat,</h6>
+                                    <p>
+                                        {{ $order->user->address->province->name }},
+                                        {{ $order->user->address->city->name }} <br>
+                                    </p>
+                                    <p>
+                                        {{ $order->user->address->details }}
+                                    </p>
 
-                            <h6>Metode Pembayaran:
-                                {{ $order->payment_method }}
-                            </h6>
-                        </div>
-                        @if ($order->payment_method == 'Transfer Bank')
-                            <div class="col-md text-end">
-                                <figure class="figure">
-                                    <a href="{{ Storage::url($order->proof_of_payment) }}" data-fancybox target="_blank">
-                                        <img src="{{ Storage::url($order->proof_of_payment) }}" class="figure-img img-fluid rounded object-fit-cover
-                                        {{ !$order->proof_of_payment ? 'placeholder' : '' }}" width="100" alt="...">
-                                    </a>
-                                    <figcaption class="figure-caption text-center">
-                                        Bukti Pembayaran
-                                    </figcaption>
-                                </figure>
+                                </address>
                             </div>
-                        @endif
+                        </div>
+                        <div class="col-6">
+                            <div class="text-end">
+                                <h6>Faktur,</h6>
+                                    <p>Nomor Resi Pesanan:
+                                        {{ $order->tracking_number ?? '-' }}
+                                    </p>
+                                    <p>Pengiriman:
+                                        {{ $order->courier }}
+                                    </p>
+                                    <p>Tambahan:
+                                        {{ $order->protect_cost == true ? 'Bubble Wrap' : '-' }}
+                                    </p>
+                                    
+                                <p>Metode Pembayaran:
+                                    {{ $order->payment_method }}
+                                </p>
+
+                                @if ($order->payment_method == 'Transfer Bank')
+                                    <figure class="figure">
+                                        <a href="{{ Storage::url($order->proof_of_payment) }}" data-fancybox
+                                            target="_blank">
+                                            <img src="{{ Storage::url($order->proof_of_payment) }}"
+                                                class="figure-img img rounded object-fit-cover
+                                        {{ !$order->proof_of_payment ? 'placeholder' : '' }}"
+                                                width="80" height="80" alt="...">
+                                        </a>
+                                        <figcaption class="figure-caption text-center">
+                                            Bukti Pembayaran
+                                        </figcaption>
+                                    </figure>
+                                @endif
+                            </div>
+
+                        </div>
                     </div>
+
+                    <hr>
                 </div>
                 <div class="col-md-12">
                     <div class="table-responsive mt-3">
@@ -92,12 +102,12 @@
                                     <td colspan="5"> Sub - Total:</td>
                                     <td>
                                         {{ 'Rp.' .
-    Number::format(
-        $order->items->sum(function ($item) {
-            return $item->qty * $item->product->price;
-        }),
-        locale: 'id',
-    ) }}
+                                            Number::format(
+                                                $order->items->sum(function ($item) {
+                                                    return $item->qty * $item->product->price;
+                                                }),
+                                                locale: 'id',
+                                            ) }}
                                     </td>
                                 </tr>
                                 <tr class="text-end">

@@ -177,7 +177,7 @@ $addToCart = function (Product $product) {
                                         <div class="col-6 mb-3">
                                             <button wire:key='{{ $variant->id }}'
                                                 wire:click='selectVariant({{ $variant->id }})' type="button"
-                                                class="btn btn-outline-light w-100 tex-center" style="color: #f35525;">
+                                                class="btn btn-light w-100 tex-center border border-dark" style="color: #f35525;">
                                                 {{ $variant->type }}
                                             </button>
                                         </div>

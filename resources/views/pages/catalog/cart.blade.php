@@ -100,6 +100,7 @@ $confirmCheckout = function () {
         $cartItem->variant->decrement('stock', $cartItem->qty);
     }
 
+
     // Update total harga pesanan
     $order->update([
         'total_amount' => $totalPrice, // Total harga pesanan ditambah ongkir
@@ -110,13 +111,13 @@ $confirmCheckout = function () {
         $jneShippingData = [
             'origin' => $this->origin->city_id,
             'destination' => $this->destination->city_id,
-            'weight' => 123,
+            'weight' => $totalWeight,
             'courier' => RajaongkirCourier::JNE,
         ];
         $tikiShippingData = [
             'origin' => $this->origin->city_id,
             'destination' => $this->destination->city_id,
-            'weight' => 123,
+            'weight' => $totalWeight,
             'courier' => RajaongkirCourier::TIKI,
         ];
 

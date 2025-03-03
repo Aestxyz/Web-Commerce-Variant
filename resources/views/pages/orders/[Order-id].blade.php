@@ -147,7 +147,7 @@ $complatedOrder = fn() => $this->order->update(['status' => 'COMPLETED']);
                     </div>
 
                     @if ($order->status === 'PROGRESS' || $order->status === 'UNPAID')
-                        <div class="alert alert-white d-flex align-items-center rounded" role="alert">
+                        <div class="alert alert-white d-flex align-items-center rounded border" role="alert">
                             <span class="fs-1 me-4">
                                 <i class="fa-solid fa-location-dot"></i>
                             </span>
@@ -176,7 +176,7 @@ $complatedOrder = fn() => $this->order->update(['status' => 'COMPLETED']);
                                 @foreach ($orderItems as $item)
                                     <div class="row mb-3">
                                         <div class="col-4">
-                                            <img src="{{ Storage::url($item->product->image) }}"
+                                            <img src="{{ Storage::url($item->product->thumbnail) }}"
                                                 class="img rounded object-fit-cover border rounded" height="100px"
                                                 width="200px" alt="{{ $item->product->title }}" />
                                         </div>
