@@ -31,6 +31,7 @@ $categories = computed(fn() => Category::latest()->get());
                                     <th>No.</th>
                                     <th>Name</th>
                                     <th>Jumlah Produk</th>
+                                    <th>Tanggal Terdaftar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,6 +40,7 @@ $categories = computed(fn() => Category::latest()->get());
                                         <td>{{ ++$no }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->products->count() }} Produk Toko</td>
+                                        <td>{{ Carbon\Carbon::parse($category->created_at)->format('d-m-Y') }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

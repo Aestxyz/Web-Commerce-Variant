@@ -30,6 +30,7 @@ $users = computed(fn() => User::where('role', 'customer')->latest()->get());
                                     <th>Telp</th>
                                     <th>Alamat</th>
                                     <th>Total Transaksi</th>
+                                    <th>Tanggal Daftar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -44,6 +45,7 @@ $users = computed(fn() => User::where('role', 'customer')->latest()->get());
                                             {{ $user->address->city->name ?? '-' }}
                                         </td>
                                         <td>{{ $user->orders->count() }} Transaksi</td>
+                                        <td>{{ Carbon\Carbon::parse($user->created_at)->format('d-m-Y') }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

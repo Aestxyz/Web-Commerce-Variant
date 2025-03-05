@@ -34,6 +34,7 @@ $orders = computed(fn() => Order::query()->get());
                                 <th>Metode Pembayaran</th>
                                 <th>Tambahan</th>
                                 <th>Jumlah </th>
+                                <th>Tanggal Terdaftar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,6 +49,7 @@ $orders = computed(fn() => Order::query()->get());
                                     <td>{{ $order->payment_method }}</td>
                                     <td>{{ $order->protect_cost == 1 ? 'Bubble Wrap' : '-' }}</td>
                                     <td>{{ $order->items->count() }} Barang</td>
+                                    <td>{{ Carbon\Carbon::parse($order->created_at)->format('d-m-Y') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

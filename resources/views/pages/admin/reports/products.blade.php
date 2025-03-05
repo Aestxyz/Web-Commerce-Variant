@@ -31,6 +31,7 @@ $products = computed(fn() => Product::latest()->get());
                                 <th>Nama Produk</th>
                                 <th>Harga</th>
                                 <th>Berat Produk</th>
+                                <th>Tanggal Terdaftar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,6 +41,7 @@ $products = computed(fn() => Product::latest()->get());
                                     <td>{{ Str::limit($product->title, 40, '...') }}</td>
                                     <td>{{ 'Rp. ' . Number::format($product->price, locale: 'id') }}</td>
                                     <td>{{ $product->weight }} gram</td>
+                                    <td>{{ Carbon\Carbon::parse($product->created_at)->format('d-m-Y') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
