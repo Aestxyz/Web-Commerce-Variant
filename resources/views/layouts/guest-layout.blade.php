@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -414,7 +415,6 @@
                     <small class="fw-bold text-white">
                         {{ $setting->province->name }},
                         {{ $setting->city->name }},
-                        {{ $setting->city->postal_code }},
                         {{ $setting->details }}
                     </small>
                 </div>
